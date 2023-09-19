@@ -85,7 +85,7 @@ class TaskServiceImpl(val repository: TaskRepository) : TaskService {
 
     override fun findAllLateTasks(): List<Task> {
         try {
-            return repository.findAllByMaximumDeliveryDateLessThan(LocalDate.now())
+            return repository.findAllByMaximumDeliveryDateLessThanAndStatusIsNot(LocalDate.now(), StatusTask.DONE)
         } catch (e: Exception) {
             e.printStackTrace()
             throw e
